@@ -12,14 +12,14 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  String? time;
-
+  
   setupWorldTime() async {
-    WorldTime instance = WorldTime(location: 'Berlin', time: time, flag: 'germany', url: "Europe/Riga");
+    WorldTime instance = WorldTime(location: 'Berlin', time: '', flag: 'germany', url: "Europe/Riga");
     await instance.getTime();
-    print(instance.time);
-    setState(() {
-      time = instance.time;
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
     });
   }
 
@@ -41,7 +41,7 @@ class _LoadingState extends State<Loading> {
             }, 
             child: Text('go to choose location'),
           ),
-          Text('$time'),
+          // Text('$time'),
         ],
       ),
     );
